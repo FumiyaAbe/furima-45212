@@ -26,7 +26,6 @@
 | name                   | string     | null: false                     |
 | info                   | text       | null: false                     |
 | price                  | integer    | null: false                     |
-| image                  |            | ActiveStorage で管理            |
 | user                   | references | null: false, foreign_key: true  |
 | category_id            | integer    | null: false                     |
 | sales_status_id        | integer    | null: false                     |
