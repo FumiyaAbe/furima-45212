@@ -57,8 +57,6 @@ RSpec.describe User, type: :model do
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
 
-    # ▼ 追加分ここから ▼
-
     it 'last_nameとfirst_nameの両方が空だと登録できない' do
       @user.last_name = ''
       @user.first_name = ''
@@ -70,7 +68,20 @@ RSpec.describe User, type: :model do
       @user.last_name = 'yamada'
       @user.first_name = 'tarou'
       @user.valid?
-      expect(@user.errors.full_messages).to include('Last name is invalid', 'First name is invalid')
+      expect(@user.errors.full_messages).to include(
+        'Last name は全角で入力してください',
+        'First name は全角で入力してください'
+      )
+    end
+
+    it 'last_name_kanaとfirst_name_kanaは全角カタカナでないと登録できない' do
+      @user.last_name_kana = 'やまだ'
+      @user.first_name_kana = 'たろう'
+      @user.valid?
+      expect(@user.errors.full_messages).to include(
+        'Last name kana は全角カタカナで入力してください',
+        'First name kana は全角カタカナで入力してください'
+      )
     end
 
     it 'last_name_kanaとfirst_name_kanaの両方が空だと登録できない' do
@@ -80,6 +91,10 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Last name kana can't be blank", "First name kana can't be blank")
     end
 
-    # ▲ 追加分ここまで ▲
+    it 'birth_dateが空では登録できない' do
+      @user.birth_date = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birth date can't be blank")
+    end
   end
 end
