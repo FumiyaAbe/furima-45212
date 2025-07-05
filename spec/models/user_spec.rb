@@ -50,6 +50,20 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('Email is invalid')
     end
 
+    it 'passwordが英字のみでは登録できない' do
+      @user.password = 'abcdef'
+      @user.password_confirmation = 'abcdef'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password は英字と数字の両方を含めて設定してください')
+    end
+
+    it 'passwordが数字のみでは登録できない' do
+      @user.password = '123456'
+      @user.password_confirmation = '123456'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password は英字と数字の両方を含めて設定してください')
+    end
+
     it 'emailが重複していると登録できない' do
       @user.save
       another_user = FactoryBot.build(:user, email: @user.email)
@@ -57,11 +71,16 @@ RSpec.describe User, type: :model do
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
 
-    it 'last_nameとfirst_nameの両方が空だと登録できない' do
+    it 'last_nameが空では登録できない' do
       @user.last_name = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name can't be blank")
+    end
+
+    it 'first_nameが空では登録できない' do
       @user.first_name = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("Last name can't be blank", "First name can't be blank")
+      expect(@user.errors.full_messages).to include("First name can't be blank")
     end
 
     it 'last_nameとfirst_nameは全角でないと登録できない' do
@@ -84,11 +103,16 @@ RSpec.describe User, type: :model do
       )
     end
 
-    it 'last_name_kanaとfirst_name_kanaの両方が空だと登録できない' do
+    it 'last_name_kanaが空では登録できない' do
       @user.last_name_kana = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+    end
+
+    it 'first_name_kanaが空では登録できない' do
       @user.first_name_kana = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("Last name kana can't be blank", "First name kana can't be blank")
+      expect(@user.errors.full_messages).to include("First name kana can't be blank")
     end
 
     it 'birth_dateが空では登録できない' do
