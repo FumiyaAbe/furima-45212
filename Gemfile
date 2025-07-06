@@ -82,3 +82,9 @@ gem 'devise'
 group :development, :test do
   gem 'factory_bot_rails'
 end
+
+gem 'active_hash'
+
+gem 'image_processing', '~> 1.2'
+gem 'mini_magick'
+gem "pry-rails"
