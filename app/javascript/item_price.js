@@ -1,6 +1,6 @@
 // app/javascript/item_price.js
 
-document.addEventListener("turbo:load", () => {
+const price = () => {
   const priceInput = document.getElementById("item-price");
   if (!priceInput) return;
 
@@ -19,4 +19,7 @@ document.addEventListener("turbo:load", () => {
       profitDom.textContent = "-";
     }
   });
-});
+};
+
+window.addEventListener("turbo:load", price);
+window.addEventListener("turbo:render", price);

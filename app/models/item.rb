@@ -4,7 +4,7 @@ class Item < ApplicationRecord
 
   # アソシエーション
   belongs_to :user
-  has_one :order
+  # has_one :order ←購入機能の実装時に追加
 
   # ActiveHashとのアソシエーション
   extend ActiveHash::Associations::ActiveRecordExtensions
