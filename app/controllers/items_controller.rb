@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit] # ← :update, :destroy を編集・消去機能実装時に追加
+  before_action :authenticate_user!, only: [:new, :create] # ← , :edit, :update, :destroy を編集・消去機能実装時に追加
   # before_action :set_item, only: [:show, :edit, :update] #←詳細・編集機能実装時に追加
 
   # 後ほど実装する(一覧)
