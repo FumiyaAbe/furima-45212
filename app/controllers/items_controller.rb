@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
   #   end
   # end
 
-  # private
+  private
 
   # def set_item
   #   @item = Item.find(params[:id])
