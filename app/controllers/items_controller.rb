@@ -3,9 +3,8 @@ class ItemsController < ApplicationController
   # before_action :set_item, only: [:show, :edit, :update] #←詳細・編集機能実装時に追加
 
   # 後ほど実装する(一覧)
-  # def index
-  #   @items = Item.includes(:user).order(created_at: :desc)
-  # end
+  def index
+  end
 
   def new
     @item = Item.new

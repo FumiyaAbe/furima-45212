@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   # Association
   has_many :items
-  has_many :orders
+  # has_many :orders
 
   # ニックネーム必須
   validates :nickname, presence: true

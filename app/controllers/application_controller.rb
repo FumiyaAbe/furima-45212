@@ -4,11 +4,6 @@ class ApplicationController < ActionController::Base
   # Deviseコントローラの場合のみストロングパラメータを設定
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # # ルートパス用のindexアクション没
-  # def index
-  #   render template: 'items/index'
-  # end
-
   private
 
   def basic_auth
