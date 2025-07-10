@@ -139,10 +139,10 @@
                     <%= item.name %>
                   </h3>
                   <div class='item-price'>
-                    <span>
-                      <%= item.shipping_fee_status.name %><br>
-                      <%= number_to_currency(item.price, unit: "¥") %>
-                    </span>
+                  <span>
+                    <%= "#{number_with_delimiter(item.price)}" %>円<br>
+                    <%= item.shipping_fee_status.name %>
+                  </span>
                   </div>
                 </div>
               <% end %>
