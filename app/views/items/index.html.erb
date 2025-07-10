@@ -130,7 +130,7 @@
         <% if @items.present? %>
           <% @items.each do |item| %>
             <li class='list'>
-              <%= link_to item_path(item) do %>
+              <%= link_to "#" do %>
                 <div class='item-img-content'>
                 <%= image_tag item.image.variant(resize_to_fill: [300, 200]) if item.image.attached? %>
                 </div>
@@ -139,7 +139,10 @@
                     <%= item.name %>
                   </h3>
                   <div class='item-price'>
-                    <span><%= number_to_currency(item.price, unit: "¥") %><br>配送料負担</span>
+                    <span>
+                      <%= item.shipping_fee_status.name %><br>
+                      <%= number_to_currency(item.price, unit: "¥") %>
+                    </span>
                   </div>
                 </div>
               <% end %>
