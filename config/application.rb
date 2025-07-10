@@ -11,8 +11,7 @@ module Furima45212
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
-    #↓商品詳細・一覧機能実装時に追加
-    #  config.active_storage.variant_processor = :mini_magick
+     config.active_storage.variant_processor = :mini_magick
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
