@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create] # ← , :edit, :update, :destroy を編集・消去機能実装時に追加
-  # before_action :set_item, only: [:show, :edit, :update] #←詳細・編集機能実装時に追加
+  before_action :set_item, only: [:show] # ←:edit, :update 詳細・編集機能実装時に追加
 
   # 後ほど実装する(一覧)
   def index
@@ -11,10 +11,15 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  # 後ほど実装する(詳細)
-  # def show
-  #   @item = Item.find(params[:id])
-  # end
+  def show
+    @item = Item.find(params[:id])
+    # 次と前の商品表示の為の記述はじまり
+    @previous_item = Item.where('id < ?', @item.id).order(id: :desc).first
+    @next_item = Item.where('id > ?', @item.id).order(id: :asc).first
+    @previous_item = Item.where('id < ?', @item.id).order(id: :desc).first
+    @next_item = Item.where('id > ?', @item.id).order(id: :asc).first
+    # 次と前の商品表示の為の記述終わり
+  end
 
   # 後ほど実装する(編集)
   # def edit
@@ -53,9 +58,9 @@ class ItemsController < ApplicationController
 
   private
 
-  # def set_item
-  #   @item = Item.find(params[:id])
-  # end
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   # app/controllers/items_controller.rb
 
