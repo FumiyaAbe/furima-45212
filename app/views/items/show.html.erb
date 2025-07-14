@@ -28,7 +28,7 @@
     <!-- 出品者自身の場合（編集・削除ボタン） -->
     <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
-    <%= link_to "削除", item_path(@item), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "item-destroy" %>
+  <%= link_to "削除", item_path(@item), data: { turbo_method: :delete }, class: "item-destroy" %>
   <% else %>
     <!-- 出品者以外のログインユーザー（購入ボタン） -->
     <%= link_to "購入画面に進む", "#", class: "item-red-btn" %>
