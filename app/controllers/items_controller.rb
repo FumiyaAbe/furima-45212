@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update] # ← :destroy を編集・消去機能実装時に追加
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   # 後ほど実装する(一覧)
   def index
@@ -41,21 +42,24 @@ class ItemsController < ApplicationController
     end
   end
 
-  # #下記をコメントアウトするとエラーが出る(Unknown action )
-  # def destroy
-  #   @item = Item.find(params[:id])
-  #   if @item.user_id == current_user.id
-  #     @item.destroy
-  #     redirect_to root_path, notice: '商品を削除しました'
-  #   else
-  #     redirect_to root_path, alert: '不正な操作です'
-  #   end
-  # end
+  def destroy
+    @item = Item.find(params[:id])
+    if @item.user_id == current_user.id
+      @item.destroy
+      redirect_to root_path, notice: '商品を削除しました'
+    else
+      redirect_to root_path, alert: '不正な操作です'
+    end
+  end
 
   private
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+    redirect_to root_path unless @item.user_id == current_user.id
   end
 
   # app/controllers/items_controller.rb
