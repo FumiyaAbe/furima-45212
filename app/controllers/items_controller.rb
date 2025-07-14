@@ -12,7 +12,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
     # 次と前の商品表示の為の記述はじまり
     @previous_item = Item.where('id < ?', @item.id).order(id: :desc).first
     @next_item = Item.where('id > ?', @item.id).order(id: :asc).first
@@ -22,7 +21,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
     redirect_to root_path unless current_user == @item.user
   end
 
