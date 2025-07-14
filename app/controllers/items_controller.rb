@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create] # ← , :edit, :update, :destroy を編集・消去機能実装時に追加
-  before_action :set_item, only: [:show] # ←:edit, :update 詳細・編集機能実装時に追加
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update] # ← :destroy を編集・消去機能実装時に追加
+  before_action :set_item, only: [:show, :edit, :update]
 
   # 後ほど実装する(一覧)
   def index
@@ -12,7 +12,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
     # 次と前の商品表示の為の記述はじまり
     @previous_item = Item.where('id < ?', @item.id).order(id: :desc).first
     @next_item = Item.where('id > ?', @item.id).order(id: :asc).first
@@ -21,20 +20,17 @@ class ItemsController < ApplicationController
     # 次と前の商品表示の為の記述終わり
   end
 
-  # 後ほど実装する(編集)
-  # def edit
-  #   # 出品者以外はトップページへリダイレクト
-  #   redirect_to root_path unless current_user == @item.user
-  # end
+  def edit
+    redirect_to root_path unless current_user == @item.user
+  end
 
-  # 後ほど実装する(編集)
-  # def update
-  #   if @item.update(item_params)
-  #     redirect_to item_path(@item)
-  #   else
-  #     render :edit, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def create
     @item = Item.new(item_params)
