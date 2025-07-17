@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   # Deviseコントローラの場合のみストロングパラメータを設定
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  before_action :set_payjp_public_key
+
   private
 
   def basic_auth
@@ -21,5 +23,9 @@ class ApplicationController < ActionController::Base
                                         :first_name_kana,
                                         :birth_date
                                       ])
+  end
+
+  def set_payjp_public_key
+    gon.public_key = Rails.application.credentials[:payjp_public_key]
   end
 end

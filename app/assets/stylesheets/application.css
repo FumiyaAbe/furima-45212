@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+ 
+/* PAY.JP入力欄外枠の調整 */
+#number-form,
+#expiry-form,
+#cvc-form {
+  padding: 10px 16px 18px;
+  margin: 0;
+  width: 100%;
+  max-width: 400px;   /* お好みで調整 */
+  height: 40px;       /* お好みで調整 */
+}

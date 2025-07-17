@@ -4,7 +4,7 @@ class Item < ApplicationRecord
 
   # アソシエーション
   belongs_to :user
-  # has_one :order ←購入機能の実装時に追加
+  has_one :order
 
   # ActiveHashとのアソシエーション
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -13,6 +13,11 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee_status
   belongs_to :prefecture
   belongs_to :scheduled_delivery
+
+  # 購入済みかどうかの判断
+  def sold_out?
+    order.present?
+  end
 
   # バリデーション
   with_options presence: true do
