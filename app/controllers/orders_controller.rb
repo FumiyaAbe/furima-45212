@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
   before_action :move_to_root, only: [:index, :create]
+  before_action :set_payjp_public_key
 
   def index
     @order_address = OrderAddress.new
@@ -29,6 +30,10 @@ class OrdersController < ApplicationController
     return unless current_user == @item.user || @item.sold_out?
 
     redirect_to root_path
+  end
+
+  def set_payjp_public_key
+    gon.public_key = Rails.application.credentials[:payjp_public_key]
   end
 
   def order_params
