@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :move_to_index_if_sold_out, only: [:edit, :update, :destroy]
 
   # 後ほど実装する(一覧)
   def index
@@ -57,7 +58,10 @@ class ItemsController < ApplicationController
     redirect_to root_path unless @item.user_id == current_user.id
   end
 
-  # app/controllers/items_controller.rb
+  # ここで購入済み商品を編集できないように制御
+  def move_to_index_if_sold_out
+    redirect_to root_path if @item.sold_out?
+  end
 
   def item_params
     params.require(:item).permit(:name, :info, :price, :image, :category_id, :sales_status_id, :shipping_fee_status_id,
