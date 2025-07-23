@@ -5,7 +5,8 @@ app_path = File.expand_path('../../../', __FILE__)  # Capistranoの構成によ�
 worker_processes 1
 
 # アプリケーションの設置ディレクトリ（Capistranoの current ディレクトリ）
-working_directory "#{app_path}/current"
+# working_directory "#{app_path}/current"
+working_directory "/var/www/furima-45212/current"
 
 # UnicornのPIDファイルの設置先
 pid "#{app_path}/shared/tmp/pids/unicorn.pid"
