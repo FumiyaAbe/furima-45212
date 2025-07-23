@@ -20,7 +20,7 @@ set :rbenv_ruby, '3.2.0'
 
 # 使用するSSH鍵
 set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['~/.ssh/あなたのキーペア名.pem']  # 例: ['~/.ssh/furima-key.pem']
+                  keys: ['~/.ssh/furima-45212_keypair_v2.pem']
 
 # Unicornの設定
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
