@@ -6,7 +6,7 @@ worker_processes 1
 
 # アプリケーションの設置ディレクトリ（Capistranoの current ディレクトリ）
 # working_directory "#{app_path}/current"
-working_directory "/var/www/furima-45212/current"
+working_directory "#{app_path}/current"
 
 # UnicornのPIDファイルの設置先
 pid "#{app_path}/shared/tmp/pids/unicorn.pid"
