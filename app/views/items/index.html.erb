@@ -132,7 +132,7 @@
             <li class='list'>
               <%= link_to item_path(item) do %>
                 <div class='item-img-content'>
-                  <%= image_tag item.image.variant(resize_to_fill: [300, 200]) if item.image.attached? %>
+                  <%= image_tag item.image, class: "item-img"%>
                     <% if item.sold_out? %>
                       <div class='sold-out'>
                         <span>Sold Out!!</span>
